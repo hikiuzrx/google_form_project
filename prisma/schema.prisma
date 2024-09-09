@@ -28,7 +28,7 @@ model Question {
   form         Form?    @relation("my questions", fields: [formId], references: [id])
   type         QuestionType
   text         String
-  options       Json?
+  options       String[]
   correctAnswer String
   
 }

@@ -1,8 +1,8 @@
 import { Request,Response } from "express"
-import { generateAcessToken } from "../../utils/genToken"
+import { generateAcessToken } from "../utils/genToken"
 import bcrypt from 'bcrypt'
-import { isEmailValid,checkPasswordStrength } from "../../utils/credentatilsCheck"
-import { db } from "../../utils/db.server"
+import { isEmailValid,checkPasswordStrength } from "../utils/credentatilsCheck"
+import { db } from "../utils/db.server"
 const Register = async (req:Request,res:Response) =>{
      const {email,password} = req.body
      if(!email || !password){
