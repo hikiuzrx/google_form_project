@@ -7,3 +7,5 @@ the front end is kind of a mess because this project wasn't front end oriented s
 THE BACK END: 
 it was developped using Node Express js + Typescript + Prisma ORM with PostgreSQL data base 
 the authentication system in this application was a mix of simple credentials authentication handled by the server and google authentication handled by NEXT AUTH package the project is lil messy and still on progress 
+# The purpose of this project :
+this project is supposed to be a clone for google forms meaning it will allow users to authenticate and create forms and customize them however they like and share them with other users , they can also monitore the responses from users and reply to them
