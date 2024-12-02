@@ -1,0 +1,67 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+generator client  {
+ provider = "prisma-client-js"
+}
+
+model User {
+  userId Int @id @default(autoincrement())
+  firstName String? 
+  lastName String?
+  userName String @unique
+  email String @unique
+  password String?
+  method RM  @default(Local)
+  forms Forms[]
+  responses Response[]
+}
+model Forms {
+  formId Int @id @default(autoincrement())
+  title String 
+  dateCreation DateTime @default(now())
+  ownerId Int 
+  user User  @relation(fields: [ownerId], references: [userId])
+  response Response[] @relation("response for")
+  typicalResponseId Int? @unique
+  typicalR Response? @relation("typical response",fields: [typicalResponseId],references: [responseId])
+  questions Question[]
+}
+model Response {
+  responseId Int @id @default(autoincrement())
+  rfor Int @unique
+  form Forms @relation("response for",fields: [rfor], references: [formId])
+  created DateTime @default(now())
+  typfor Forms? @relation("typical response")
+  ownerId Int 
+  answers Answer[]
+  user User @relation(fields: [ownerId],references: [userId])
+}
+model Question {
+  formId Int
+  form Forms @relation(fields: [formId],references: [formId])
+  type Type
+  text String
+  number Int 
+  options String[]
+  correctAnswer String[]
+  @@id([formId,number])
+
+}
+model Answer{
+  responseId Int
+  number Int  
+  belongTo Response @relation(fields: [responseId],references: [responseId])
+  content String[]
+  @@id([responseId,number])
+}
+enum Type {
+  SimpleQuestion
+  QCM
+  MultyQCM
+}
+enum RM {
+  Google
+  Local
+}
